@@ -5,6 +5,7 @@ from django.db import models
 
 
 class Room(models.Model):
+    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -18,9 +19,9 @@ class Room(models.Model):
 
 
 class Message(models.Model):
-    body = models.TextField()
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)  # ak zmazem miestnost zmazem aj vsetky spravy v miestnosti
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)  # ak zmazem miestnost zmazem aj vsetky spravy v miestnosti
+    body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
