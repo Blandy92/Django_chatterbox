@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>Chatterbox</header>
+
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/">Create Room</a></li>
+        <li><a href="/">Rooms</a></li>
+        <li class="last-item"><a href="/">Login/Signup</a></li>
+    </ul>
+</nav>
+
+<main>  <!-- Toto sa bude menit na kazdej stranke -->
+    <div class="login-form">
+        <form action="" method="POST">
+            <div class="form-row">
+                <div class="label">
+                    <label for="nick">User name:</label>
+                </div>
+                <input type="text" name="nick" id="nick" placeholder="Nickname">
+            </div>
+            <div class="form-row">
+                <div class="label">
+                    <label for="pswd">Password:</label>
+                </div>
+                <input type="password" name="pswd" id="pswd">
+            </div>
+            <!-- TODO Re-password a e-mail-->
+            <div class="form-row">
+                <div class="submit">
+                    <input type="submit" value="Send">
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+
+</body>
+</html>

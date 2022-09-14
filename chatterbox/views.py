@@ -37,4 +37,4 @@ def room(request, pk):
     messages = Message.objects.filter(room=pk)  #vyberieme vsetky spravy v danej miestnosti
 
     context = {'room': room, 'messages': messages}
-    return render(request, "chatterbox/room.html", context)
+    return render(request, "chatterbox/list_of_rooms.html", context)
