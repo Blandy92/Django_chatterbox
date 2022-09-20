@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-sp2t&j2e=pwa(qb_&qjpke)u=e1_b5=m_ixi+qp*b+sbs5h@oc'
+SECRET_KEY = 'django-insecure-5g8axmj%(#wy(r@3o1r1w6mtf7r(r-#b8kg@21k2%cf9so4pkc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chatterbox.apps.ChatterboxConfig',
+
+    # browser reload
+    'django_browser_reload',
+
+    # naše aplikace v rámci projektu
+    'chatterbox',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'chatterbox_project.urls'
@@ -122,3 +129,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Login and authentication
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "login"

@@ -1,17 +1,17 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <h1>Vysledky hledani</h1>
+    <h1>Výsledky hledání</h1>
     <h2>Rooms:</h2>
-        <ul>
-            {% for room in rooms %}
-                <li>{{ room.name }}</li>
-            {% endfor %}
-        </ul>
+    <ul>
+        {% for room in rooms %}
+            <li>{{ room.name }}</li>
+        {% endfor %}
+    </ul>
     <h2>Messages:</h2>
-        <ul>
-            {% for message in messages %}
-                <li>{{ message.body }}, {{ message.user }}</li>
-            {% endfor %}
-        </ul>
+    <ul>
+        {% for message in messages %}
+            <li><b>{{ message.user }}:</b> {{ message.body }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
