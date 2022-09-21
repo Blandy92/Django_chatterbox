@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 import chatterbox.views
 
@@ -25,12 +27,14 @@ urlpatterns = [
     # path(<cesta>, <view>, name=<name>)
     path('', chatterbox.views.home, name='home'),
     path('hello/<s>', chatterbox.views.hello),
-    path('search/<s>', chatterbox.views.search, name="search"),  # {% url 'search' pattern %}
+    path('search/', chatterbox.views.search, name="search"),
+    # path('search/<s>', chatterbox.views.search, name="search"),  # {% url 'search' pattern %}
     path('room/<str:pk>/', chatterbox.views.room, name="room"),  #{% url 'room' room.id %}
     path('rooms/', chatterbox.views.rooms, name='rooms'),
     path('create_room/', chatterbox.views.create_room, name="create_room"),
     #path('create_room/new_room/', chatterbox.views.new_room, name="new_room"),
     path('delete_room/<pk>/', chatterbox.views.delete_room, name="delete_room"),
+    path('delete_room_yes/<pk>/', chatterbox.views.delete_room_yes, name="delete_room_yes"),
     path('edit_room/<pk>/', chatterbox.views.EditRoom.as_view(), name="edit_room"),
 
     # accounts aplikace
@@ -38,4 +42,4 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),  # login, logout, password_change...
 
     path("__reload__/", include("django_browser_reload.urls"))  # reload pro vkládání nové zprávy v room
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # add static
