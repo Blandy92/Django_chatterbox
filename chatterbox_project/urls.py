@@ -36,7 +36,8 @@ urlpatterns = [
                   #PROFILES APLIKACE
                   path('users/', profiles.views.profiles_list, name='profiles'),
                   path('user/<pk>/', profiles.views.user_profile, name='profile'),
-                  path('edituser/<pk>/', profiles.views.EditProfile.as_view(), name='editprofile'),
+                  path('edituser/', profiles.views.edit_profile, name='editprofile'),
+                  path('createprofile/', profiles.views.create_profile, name='createprofile'),
 
 
                   #create room
