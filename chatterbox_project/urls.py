@@ -13,33 +13,45 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
+
+# sem budeme pridavat
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.contrib import admin
+from django.urls import path,include
 import chatterbox.views
+import profiles.views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+                  path('admin/', admin.site.urls),
 
-    # chatterbox aplikace
-    # path(<cesta>, <view>, name=<name>)
-    path('', chatterbox.views.home, name='home'),
-    path('hello/<s>', chatterbox.views.hello),
-    path('search/', chatterbox.views.search, name="search"),
-    # path('search/<s>', chatterbox.views.search, name="search"),  # {% url 'search' pattern %}
-    path('room/<str:pk>/', chatterbox.views.room, name="room"),  #{% url 'room' room.id %}
-    path('rooms/', chatterbox.views.rooms, name='rooms'),
-    path('create_room/', chatterbox.views.create_room, name="create_room"),
-    #path('create_room/new_room/', chatterbox.views.new_room, name="new_room"),
-    path('delete_room/<pk>/', chatterbox.views.delete_room, name="delete_room"),
-    path('delete_room_yes/<pk>/', chatterbox.views.delete_room_yes, name="delete_room_yes"),
-    path('edit_room/<pk>/', chatterbox.views.EditRoom.as_view(), name="edit_room"),
+                  # chatterbox aplikace, ktore sme vytvorili/vytvarame my
+                  # path('cesta', <views>, name='name')
+                  path('', chatterbox.views.home, name='home'),
+                  path('hello/<s>', chatterbox.views.hello), # hlada v zlozke chatterbox/views a konkretnu funkciu/aplikaciu
+                  path('search/', chatterbox.views.search, name='search'),
+                  path('room/<str:pk>/', chatterbox.views.room, name="room"),
+                  path('rooms/', chatterbox.views.rooms, name='rooms'),
 
-    # accounts aplikace
-    path("accounts/", include("accounts.urls")),  # signup
-    path("accounts/", include("django.contrib.auth.urls")),  # login, logout, password_change...
+                  #PROFILES APLIKACE
+                  path('users/', profiles.views.profiles_list, name='profiles'),
+                  path('user/<pk>/', profiles.views.user_profile, name='profile'),
+                  path('edituser/<pk>/', profiles.views.EditProfile.as_view(), name='editprofile'),
 
-    path("__reload__/", include("django_browser_reload.urls"))  # reload pro vkládání nové zprávy v room
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # add static
+
+                  #create room
+                  path('create_room/', chatterbox.views.create_room, name="create_room"),
+                  # path('create_room/new_room/', chatterbox.views.new_room, name='new_room'), # toto riesi create_room/
+
+                  path('delete_room/<str:pk>/', chatterbox.views.delete_room, name='delete_room'),
+                  path('delete_room_yes/<pk>/', chatterbox.views.delete_room_yes, name="delete_room_yes"),
+                  path('edit_room/<pk>/', chatterbox.views.EditRoom.as_view(), name='edit_room'),
+
+
+                  # accounts aplikace
+                  path("accounts/", include("accounts.urls")), # vygeneruje signup
+                  path("accounts/", include("django.contrib.auth.urls")), #vsetky ostatne authorizacne urls
+
+                  path("__reload__/", include("django_browser_reload.urls"))
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # add static
+
