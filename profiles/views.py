@@ -81,14 +81,14 @@ def edit_profile(request):
         last_name = request.POST.get('last_name').strip()
         email = request.POST.get('email').strip()
         aboutme = request.POST.get('aboutme').strip()
-        file_url = ""
+        user = User.objects.get(id=request.user.id)
+        file_url = user.userprofile.photo
         if request.FILES.get('upload'):  # pokial sme poslali subor
             upload = request.FILES['upload']  # z requestu si vytiahnem subor
             file_storage = FileSystemStorage()  # praca so suborovym systemom
             file = file_storage.save(upload.name, upload)  # ulozime subor na disk
             file_url = file_storage.url(file)
 
-        user = User.objects.get(id=request.user.id)
         user.first_name = first_name
         user.last_name = last_name
         user.email = email
